@@ -31,11 +31,12 @@ public class ProductController {
     // Less Used
     // @RequestMapping(value = "/products/id", method = RequestMethod.GET)/
    @GetMapping("/products/{id}")
-    public ResponseEntity <ProductResponseDto> getProductById(@PathVariable long id) throws ProductNotFoundException {
+    public ProductResponseDto getProductById(@PathVariable long id) throws ProductNotFoundException {
 
-       ResponseEntity responseEntity = new ResponseEntity<>(ProductResponseDto.from(productService.getProductById(id)), HttpStatus.OK);
+       Product product = productService.getProductById(id);
+       ProductResponseDto productResponseDto = ProductResponseDto.from(product);
       //Jackson : serialiation library
-       return responseEntity;
+       return productResponseDto;
 
    }
 
